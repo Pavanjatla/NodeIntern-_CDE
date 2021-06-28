@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 
+app.set("view engine","ejs")
+
 app.get('/', (req, res) => {
-  res.sendFile("./views/home.html", { root: __dirname });
+  res.render("home", { title: "home page" });
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile('./views/about.html', { root: __dirname });
+  res.render("about");
 });
 
 app.get('/about-me', (req, res) => {
@@ -14,7 +16,7 @@ app.get('/about-me', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile('./views/error.html', { root: __dirname });
+  res.render("error")
 });
 
 
