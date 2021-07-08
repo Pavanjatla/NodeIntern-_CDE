@@ -2,10 +2,14 @@ const express = require('express')
 const Mongoose  = require('mongoose')
 const app = express()
 const morgan=require('morgan')
+const blogrouter=require('./routes/blogrouter')
 const Blog=require('./models/blogmodel')
+
 
 app.set("view engine","ejs")
 app.use(express.static("public"));
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 require("dotenv").config();
 
@@ -23,9 +27,11 @@ Mongoose
     .catch((err) =>console.log(err));
 
 app.use(morgan("dev"));
+app.use("/blogs", blogrouter);
 
 app.get('/add-blog',(req,res) => {
   const blog = new Blog({
+    
     title:"this is title",
     snippet:"this is snip",
     body:"this is body",
@@ -62,23 +68,21 @@ app.get('/del-blog/:id',(req,res)=>{
   });
 });
 
-app.get('/', (req, res) => {
-Blog.find({})
-  .then((result) =>{
-    res.render("home", { title: "home page" ,blogs:result});  
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+app.get("/", (req, res) => {
+  Blog.find({})
+    .then((result) =>{
+      res.render("home", { title: "home page" , blogs : result});  
+    }) 
+    .catch((err)=>{
+      console.log(err);
+    });
 });
 
 app.get('/about', (req, res) => {
   res.render("about",{ title: "About page" });
 });
 
-app.get('/about-me', (req, res) => {
-  res.redirect('about');
-});
+
 
 app.get('*', (req, res) => {
   res.render("error",{ title: "Error page" })

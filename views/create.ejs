@@ -1,0 +1,15 @@
+<%- include ("./partials/head.ejs")  %> 
+
+<form action="/blogs" method="POST">
+    <label>title</label><br>
+    <input type="text" class="title" id="title"><br>
+    <label>body</label><br>
+    <input type="text" class="body" id="body"><br>
+    <label>snip</label><br>
+    <input type="text" class="snippet" id="snippet"><br>
+    <button type="submit">POST</button>
+
+</form>
+
+
+<%- include ("./partials/foot.ejs")  %> 
