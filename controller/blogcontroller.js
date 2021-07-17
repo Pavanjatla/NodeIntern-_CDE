@@ -9,7 +9,7 @@ const blog_index =(req,res) =>{
 
 const blog_details=(req,res)=>{
     Blog.findById(req.params.id)
-    .then((blog) => res.render("home", {title : blog.title ,blog}))
+    .then((blog) => res.render("details", {title : blog.title ,blog}))
     .catch((err)=>console.log(err));
 };
 
@@ -19,7 +19,6 @@ const blog_create =(req,res)=>{
 };
 
 const blog_post=(req,res)=>{
-    console.log(req.body)
     Blog.create(req.body)
     .then(() => res.redirect("/blogs"))
     .catch((err) => console.log(err));
