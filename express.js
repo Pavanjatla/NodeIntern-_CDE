@@ -3,6 +3,7 @@ const Mongoose  = require('mongoose')
 const app = express()
 const morgan=require('morgan')
 const blogrouter=require('./routes/blogrouter')
+const userrouter=require('./routes/userrouter')
 const Blog=require('./models/blogmodel')
 
 
@@ -28,6 +29,7 @@ Mongoose
 
 app.use(morgan("dev"));
 app.use("/blogs", blogrouter);
+app.use(userrouter);
 
 app.get('/add-blog',(req,res) => {
   const blog = new Blog({
