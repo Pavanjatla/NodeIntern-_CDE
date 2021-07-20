@@ -3,13 +3,44 @@
 <form action="/blogs" method="POST">
     <label>title</label><br>
     <input type="text" class="title" id="title" name="title" required><br>
+    <div class="title error"></div>
     <label>body</label><br>
     <input type="text" class="body" id="body" name="body" required><br>
+    <div class="body error"></div>
     <label>snip</label><br>
     <input type="text" class="snippet" id="snippet" name="snippet" required><br>
+    <div class="snippet error"></div>
     <button type="submit">POST</button>
 
 </form>
 
 
 <%- include ("./partials/foot.ejs")  %> 
+
+<script>
+    const form = document.querySelector("form");
+    const titleError = document.querySelector(".title.error");
+    const snippetError = document.querySelector(".snippet.error");
+    const bodyError = document.querySelector(".body.error");
+    //const userError = document.querySelector(".user.error");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      //reset errors
+      titleError.textContent = "";
+      snippetError.textContent = "";
+      bodyError.textContent = "";
+      //userError.textContent = "";
+
+      // get values
+      const title = form.title.value;
+      const snippet = form.snippet.value;
+      const body = form.body.value;
+
+      if (!title){
+        bodyError.textContent = "Fill title";
+    } 
+      if(!snippet || !body) {
+        bodyError.textContent = "Please Fill in data";
+      }
+    });
