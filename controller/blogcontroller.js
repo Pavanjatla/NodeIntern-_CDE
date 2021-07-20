@@ -25,7 +25,7 @@ const blog_index = (req, res) => {
     .sort({ createdAt: 1 })
     .then((blogs) => {
       console.log(blogs);
-      res.render("index", { title: "Home", blogs });
+      res.render("home", { title: "Home", blogs });
     })
 
     .catch((err) => console.log(err));
@@ -67,11 +67,11 @@ const blog_update_post = async (req, res) => {
     if (updatedBlog) {
       res.json({ updatedBlog });
     } else {
-      console.log("here error2");
+      
       res.send({ error: "Blog Found but Update Error" });
     }
   } else {
-    console.log("here error");
+    
     res.send({ error: "Blog Not Found" });
   }
 };
