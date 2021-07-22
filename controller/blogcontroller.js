@@ -24,7 +24,6 @@ const blog_index = (req, res) => {
   Blog.find()
     .sort({ createdAt: 1 })
     .then((blogs) => {
-      console.log(blogs);
       res.render("home", { title: "Home", blogs });
     })
 
@@ -56,14 +55,14 @@ const blog_post = (req, res) => {
 const blog_update_post = async (req, res) => {
   const blog = await Blog.findById(req.params.id);
   if (blog) {
-    console.log(blog);
+    
     blog.title = req.body.title || blog.title;
     blog.snippet = req.body.snippet || blog.snippet;
     blog.body = req.body.body || blog.body;
 
     const updatedBlog = await blog.save();
 
-    console.log(updatedBlog);
+    
     if (updatedBlog) {
       res.json({ updatedBlog });
     } else {
@@ -77,7 +76,7 @@ const blog_update_post = async (req, res) => {
 };
 
 const blog_delete = (req, res) => {
-  console.log(req.params.id);
+  
   Blog.findByIdAndDelete(req.params.id)
 
     .then(res.json({ redirect: "/blogs" }))

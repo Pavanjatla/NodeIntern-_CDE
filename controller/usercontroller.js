@@ -3,6 +3,31 @@ const User = require("../models/usermodel");
 
 
 
+const handleErrors = (err) => {
+  let errors = { email: "", password: "" };
+
+  if (err.code === 11000) {
+    errors.email = "That Email is already Taken";
+  }
+
+  if (err.message === "User Not Found") {
+    errors.password = "User Not Found";
+  }
+
+  if (err.message === "Incorrect Details") {
+    errors.password = "Incorrect Details";
+  }
+
+  if (err.message.includes("validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+};
+
+
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET, { expiresIn: maxAge });
@@ -31,7 +56,7 @@ const user_create_post = async (req, res) => {
 
 const user_login_post = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+  
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
