@@ -2,6 +2,7 @@ const express = require('express')
 const Mongoose  = require('mongoose')
 const app = express()
 const morgan=require('morgan')
+const cookieParser = require("cookie-parser");
 const blogrouter=require('./routes/blogrouter')
 const userrouter=require('./routes/userrouter')
 const Blog=require('./models/blogmodel')
@@ -11,8 +12,10 @@ app.set("view engine","ejs")
 app.use(express.static("public"));
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser());
 
 require("dotenv").config();
+
 
 Mongoose
     .connect(process.env.MONGO_URL, {

@@ -4,12 +4,13 @@
     <label>title</label><br>
     <input type="text" class="title" id="title" name="title" required><br>
     <div class="title error"></div>
-    <label>body</label><br>
-    <input type="text" class="body" id="body" name="body" required><br>
-    <div class="body error"></div>
+    
     <label>snip</label><br>
     <input type="text" class="snippet" id="snippet" name="snippet" required><br>
     <div class="snippet error"></div>
+    <label>body</label><br>
+    <textarea type="text" class="body" id="body" name="body" required></textarea>
+    <div class="body error"></div>
     <button type="submit">POST</button>
 
 </form>
@@ -22,7 +23,7 @@
   const titleError = document.querySelector(".title.error");
   const snippetError = document.querySelector(".snippet.error");
   const bodyError = document.querySelector(".body.error");
-  const userError = document.querySelector(".user.error");
+  //const userError = document.querySelector(".user.error");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@
     titleError.textContent = "";
     snippetError.textContent = "";
     bodyError.textContent = "";
-    userError.textContent = "";
+    //userError.textContent = "";
 
     const title = form.title.value;
     const snippet = form.snippet.value;
