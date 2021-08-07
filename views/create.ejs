@@ -1,6 +1,7 @@
 <%- include ("./partials/head.ejs")  %> 
+<div class="create-blog content">
 
-<form action="/blogs" method="POST">
+  <form action="/blogs" method="POST">
     <label>title</label><br>
     <input type="text" class="title" id="title" name="title" required><br>
     <div class="title error"></div>
@@ -14,6 +15,10 @@
     <button type="submit">POST</button>
 
 </form>
+
+</div>
+
+
 
 
 <%- include ("./partials/foot.ejs")  %> 
